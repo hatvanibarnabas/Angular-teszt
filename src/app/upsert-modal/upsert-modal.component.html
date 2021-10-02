@@ -1,0 +1,87 @@
+<div class="global-font-size">
+  <div class="modal-header">
+    <span class="modal-title">Új űrlap mező hozzáadása</span>
+    <button type="button" class="close text-light" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" [formGroup]="form">
+    <div class="card">
+
+      <div class="form-group p-3">
+        <label class="label-title" for="exampleFormControlSelect1">Űrlap mező típusa</label>
+        <select class="form-control" id="exampleFormControlSelect1" formControlName="type">
+          <option selected [ngValue]="null">Válassz egy opciót</option>
+          <option [value]="FieldType.SIMPLE">Egyszerű</option>
+          <option [value]="FieldType.EXTRA">Kifejtős</option>
+        </select>
+      </div>
+
+      <hr>
+
+      <div class="p-3">
+        <label class="label-title" for="exampleFormControlSelect1">Alapértelmezett állapot</label>
+        <div class="form-group">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="defaultState" id="inlineRadio1"
+              [value]="DefaultState.NONE" formControlName="defaultState">
+            <label class="form-check-label" for="inlineRadio1">Nincs</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="defaultState" id="inlineRadio2"
+              [value]="DefaultState.YES" formControlName="defaultState">
+            <label class="form-check-label" for="inlineRadio2">Igen</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="defaultState" id="inlineRadio3" [value]="DefaultState.NO"
+              formControlName="defaultState">
+            <label class="form-check-label" for="inlineRadio3">Nem</label>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="form-group d-flex justify-content-between p-3">
+        <label class="label-title">Kitöltött állapotban jelenítse meg a bal oldali figyelmeztető sávban a páciens
+          kartonban</label>
+        <div class="custom-control custom-switch d-inline">
+          <input type="checkbox" class="custom-control-input" id="customSwitch1" formControlName="showInLeftSide">
+          <label class="custom-control-label" for="customSwitch1"></label>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="form-group d-flex justify-content-between p-3">
+        <label class="label-title">Megjelenítés a Páciens Portálon</label>
+        <div class="custom-control custom-switch d-inline">
+          <input type="checkbox" class="custom-control-input" id="customSwitch2" formControlName="showInPortal">
+          <label class="custom-control-label" for="customSwitch2"></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mt-4">
+      <div class="form-group p-3">
+        <label class="label-title" for="fieldName">Mező elnevezése</label>
+        <input type="text" class="form-control" id="fieldName" placeholder="Kérdés..." formControlName="question">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer justify-content-between">
+    <div>
+      <button type="button" class="btn btn-warning delete-button" *ngIf="editMode" (click)="onDeleteClick()">Mező
+        törlése</button>
+    </div>
+
+    <div>
+      <button type="button" class="btn btn-outline-dark mr-2"
+        (click)="activeModal.dismiss('Cancel click')">Mégsem</button>
+      <button type="button" class="btn btn-primary" (click)="onSaveClick()">
+        <ng-container *ngIf="!editMode">Létrehozás</ng-container>
+        <ng-container *ngIf="editMode">Mentés</ng-container>
+      </button>
+    </div>
+  </div>
+</div>

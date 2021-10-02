@@ -1,0 +1,90 @@
+<header></header>
+
+<div class="container my-3">
+  <div class="row">
+    <div class="col">
+      <h1>Anamnézis mezők</h1>
+
+      <ngb-alert type="primary" [dismissible]="false">
+        <div class="d-flex">
+          <svg width="24px" height="24px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g id="Anamnézis-v2-Beállítások-2" transform="translate(-315.000000, -145.000000)" fill="#606FC7"
+                fill-rule="nonzero">
+                <g id="Group" transform="translate(303.000000, 73.000000)">
+                  <g id="Notification_box" transform="translate(0.000000, 48.000000)">
+                    <g id="help_black_24dp" transform="translate(10.000000, 22.000000)">
+                      <path
+                        d="M12,2 C6.48,2 2,6.48 2,12 C2,17.52 6.48,22 12,22 C17.52,22 22,17.52 22,12 C22,6.48 17.52,2 12,2 Z M13,19 L11,19 L11,17 L13,17 L13,19 Z M15.07,11.25 L14.17,12.17 C13.45,12.9 13,13.5 13,15 L11,15 L11,14.5 C11,13.4 11.45,12.4 12.17,11.67 L13.41,10.41 C13.78,10.05 14,9.55 14,9 C14,7.9 13.1,7 12,7 C10.9,7 10,7.9 10,9 L8,9 C8,6.79 9.79,5 12,5 C14.21,5 16,6.79 16,9 C16,9.88 15.64,10.68 15.07,11.25 Z"
+                        id="Shape"></path>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
+
+          <div class="information">
+            <p>Itt tudod szerkeszteni a páciens egészségügyi anamnézis mezőket blablaab bla további leírás még ide.<br>
+              <a href="www.w3schools.com">Nézd meg a videónkat és leírást itt</a>
+            </p>
+          </div>
+        </div>
+      </ngb-alert>
+
+      <strong>Anamnézis űrlap</strong>
+      <p class="mt-2">Ez az űrlap lesz a páciens számára is elérhető majd a Páciens Portál modul-ban. Hamarosan érkezi!
+        Így a páciens már akár otthonról, vagy a rendelőben egy tabletről is kitöltheti az adatait, ezáltal lényegesen
+        csökkentve az adminisztrációs terheket és a hiba lehetőséget a rendelőben.</p>
+
+      <div class="card">
+        <div class="row mt-3 mx-2" *ngIf="!fields.length">
+          <div class="col text-center">Nem adtál még hozzá mezőt</div>
+        </div>
+        <div [sortablejs]="fields" [sortablejsOptions]="{ animation: 150, handle: '.bi-three-dots-vertical' }">
+          <div *ngFor="let field of fields; let index = index;">
+            <div class="row mt-3 mx-2">
+              <div class="col-3 col-sm-1 d-flex justify-content-center align-items-center">
+                <i class="bi bi-three-dots-vertical"></i>
+              </div>
+
+              <div class="col-12 col-sm-10">
+                <div class="d-flex justify-content-between align-items-center">
+                  <strong>{{ field.question }}</strong>
+
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-primary px-5"
+                      [class.active]="field.defaultState === DefaultState.YES">Igen</button>
+                    <button type="button" class="btn btn-outline-primary px-5"
+                      [class.active]="field.defaultState === DefaultState.NO">Nem</button>
+                  </div>
+
+                </div>
+
+                <textarea *ngIf="field.type === FieldType.EXTRA" class="form-control mt-3"
+                  [placeholder]="field.placeholder || ''" [id]="'textarea_' + index" style="height: 100px;"></textarea>
+
+              </div>
+
+              <div class="col-3 col-sm-1 d-flex justify-content-center align-items-center">
+                <i class="bi bi-pencil-fill" (click)="onOpenModalClick(index)"></i>
+              </div>
+            </div>
+
+            <hr>
+          </div>
+        </div>
+        <div class="row mt-2 mb-3">
+          <div class="col-1"></div>
+          <div class="col-10">
+            <button class="btn btn-outline-primary w-100" (click)="onOpenModalClick(-1)">
+              <i class="bi bi-plus"></i> Új mező hozzáadása
+            </button>
+          </div>
+          <div class="col-1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
